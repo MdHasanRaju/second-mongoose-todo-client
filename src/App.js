@@ -5,7 +5,7 @@ import Header from "./components/Shared/Header";
 import AddTodo from "./components/Todo/AddTodo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RequireAuth from "./components/Login/RequireAuth"; 
+import RequireAuth from "./components/Login/RequireAuth";
 import Footer from "./components/Shared/Footer/Footer.jsx";
 
 function App() {
@@ -13,14 +13,7 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Home />
-            </RequireAuth>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/addtodo"
@@ -29,7 +22,7 @@ function App() {
               <AddTodo />
             </RequireAuth>
           }
-        /> 
+        />
       </Routes>
       <Footer></Footer>
       <ToastContainer />

@@ -9,7 +9,7 @@ const useTodos = () => {
       .then((data) => { 
         setTodos(data.blogs)
       });
-  }, []);
+  }, [todos]);
 
   return [todos, setTodos];
 };

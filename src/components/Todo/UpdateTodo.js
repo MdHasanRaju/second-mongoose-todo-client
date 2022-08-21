@@ -1,35 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-const UpdateTodo = ({ todo, setBlog, blog }) => {
-  const { register, handleSubmit } = useForm();
-  const {title, desc, _id} = todo;
-//   const {title, desc, _id} = blog;
-  console.log(todo);
+const UpdateTodo = ({setBlog, blog }) => {
+  const { register, handleSubmit } = useForm();  
+  console.log(blog);
 
-  const handleUpdateForm = (data) => {
-    console.log(data);
-    // const url = `http://localhost:9000/api/blogs/${blog?._id}`;
-    // fetch(url, {
-    //   method: "PUT",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     e.target.reset();
-    //     // console.log(result);
-    //     setBlog(result);
-    //     toast("Blog Updated Successfully");
-    //   });
+  const handleUpdateForm = (data, e) => { 
+    const url = `http://localhost:9000/api/blogs/${blog?._id}`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        e.target.reset();
+        console.log(result);
+        setBlog(result);
+        toast("Blog Updated Successfully");
+      setBlog(null)
+      });
   };
 
   return (
-    <div>
-      {/* <!-- Put this part before --> */}
+    <div> 
       <input type="checkbox" id="update-modal" class="modal-toggle" />
       <div class="modal modal-bottom sm:modal-middle">
         <div class="modal-box relative">
@@ -47,9 +44,8 @@ const UpdateTodo = ({ todo, setBlog, blog }) => {
                 <span className="label-text text-black">Title</span>
               </label>
               <input
-                type="text"
-                placeholder="Title"
-                defaultValue={todo?.title || ''}
+                type="text" 
+                defaultValue={blog?.title || ''}
                 {...register("title", { required: true })}
                 className="input input-bordered w-full max-w-xs text-black"
               />
@@ -59,18 +55,18 @@ const UpdateTodo = ({ todo, setBlog, blog }) => {
                 <span className="label-text">Description</span>
               </label>
               <input
-                type="text"
-                placeholder="Description"
-                defaultValue={todo?.desc || ''}
-                {...register("desc")}
+                type="text" 
+                defaultValue={blog?.desc || ''}
+                {...register("desc", { required: true })}
                 className="input input-bordered w-full max-w-xs text-black"
               />
             </div>
             <div className="flex justify-start modal-action">
-              <button type="submit" value="submit" className="text-white">
-                <label htmlFor="update-modal" class="btn btn-wide mt-3">
+              <button type="submit" className="text-white btn btn-wide mt-3">
+                {/* <label htmlFor="update-modal" class="btn btn-wide mt-3">
                  Update
-                </label>
+                </label> */}
+                Submit
               </button>
               {/* <label type="submit" htmlFor="update-modal" class="btn btn-wide mt-3">
               update
